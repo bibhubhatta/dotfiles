@@ -1,0 +1,76 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/zsh
+
+## Configure NSGlobalDomain
+defaults delete NSGlobalDomain
+# Configure language and region to US
+defaults write NSGlobalDomain AppleLanguages -array en-US
+defaults write NSGlobalDomain AppleLocale -string en_US
+# Switch theme automatically based on time of day
+defaults write NSGlobalDomain AppleInterfaceStyleSwitchesAutomatically -bool true
+# Enable 24-hour time
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
+# Set Saturday as the first day of week
+defaults write NSGlobalDomain AppleFirstWeekday -dict gregorian 7
+
+## Configure time display
+defaults delete com.apple.menuextra.clock
+defaults write com.apple.menuextra.clock DateFormat -string "EEE H:mm"
+defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
+defaults write com.apple.menuextra.clock IsAnalog -bool false
+# This is counter-intuitive, but it actually shows the date
+# This is the "When Space Allows" option in System Settings > Control Center > Date > Show Date
+defaults write com.apple.menuextra.clock ShowDate -bool false
+defaults write com.apple.menuextra.clock ShowDayOfWeek -bool false
+defaults write com.apple.menuextra.clock ShowSeconds -bool true
+
+## Configure Dock
+killall Dock # Dock must be restarted for the delete to take effect
+defaults delete com.apple.dock
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock tilesize -int 60
+defaults write com.apple.dock largesize -int 90
+defaults write com.apple.dock magnification -bool true
+# Delete all apps from Dock
+# Give Dock time to add default tiles before removing them -- otherwise it will not work
+sleep 5
+defaults write com.apple.dock persistent-apps -array
+killall Dock
+
+## Show file extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+## Configure Finder
+defaults delete com.apple.finder
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.finder FXDefaultSearchScope -string SCcf
+killall Finder
+
+## Configure trackpad
+defaults delete com.apple.AppleMultitouchTrackpad
+# Set trackpad click to light
+defaults write com.apple.AppleMultitouchTrackpad FirstClickThreshold -int 0
+# Click with two fingers to right click
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
+# Set trackpad tracking speed to maximum
+defaults write NSGlobalDomain com.apple.trackpad.scaling -float 3
+# Set trackpad scrolling speed to maximum
+defaults write NSGlobalDomain com.apple.trackpad.scrolling -float 3
+
+## Configure keyboard
+# Enable keyboard navigation for all controls
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
+# Disable press-and-hold for keys in favor of key repeat
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+# Show emoji and symbols on Fn key press
+defaults write com.apple.HIToolbox AppleFnUsageType -int "2"
+
+## Configure screenshots
+# Increase thumbnail preview duration
+defaults write com.apple.screencaptureui "thumbnailExpiration" -float 15
+
+## Restart SystemUIServer
+killall SystemUIServer
+{{ end }}
