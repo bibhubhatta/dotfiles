@@ -33,6 +33,8 @@ defaults write com.apple.dock largesize -int 90
 defaults write com.apple.dock magnification -bool true
 # Do not rearrange spaces based on most recent use
 defaults write com.apple.dock "mru-spaces" -bool "false"
+# Group windows by application in Mission Control
+defaults write com.apple.dock "expose-group-apps" -bool "true"
 # Delete all apps from Dock
 # Give Dock time to add default tiles before removing them -- otherwise it will not work
 sleep 5
