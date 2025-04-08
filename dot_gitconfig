@@ -54,3 +54,7 @@
         conflictstyle = zdiff3
 [pull]
         # rebase = true
+
+## Miscellaneous
+[gitbutler]
+	aiModelProvider = anthropic
