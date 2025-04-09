@@ -1,6 +1,8 @@
 {{ if eq .osid "linux-debian" "linux-ubuntu" -}}
 #!/bin/bash
 
+set -eufo pipefail
+
 # Install fish
 sudo apt update
 sudo apt install -y fish
@@ -49,8 +51,8 @@ sudo apt install -y gpg
 sudo apt install -y bat
 
 # Install ripgrep
-$ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep_14.1.0-1_amd64.deb
-$ sudo dpkg -i ripgrep_14.1.0-1_amd64.deb
+curl -LO https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep_14.1.0-1_amd64.deb
+sudo dpkg -i ripgrep_14.1.0-1_amd64.deb
 
 sudo apt install -y fd-find
 

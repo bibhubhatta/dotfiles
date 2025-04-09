@@ -1,6 +1,8 @@
 {{ if eq .chezmoi.os "darwin" -}}
 #!/bin/zsh
 
+set -eufo pipefail
+
 ## Configure NSGlobalDomain
 defaults delete NSGlobalDomain
 # Configure language and region to US
