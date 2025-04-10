@@ -23,13 +23,6 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 # Install neovim
 sudo apt install -y neovim
 
-# Install zoxide
-curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-# Configure shells to use zoxide
-echo "zoxide init fish | source" >> ~/.config/fish/config.fish
-echo "eval "$(zoxide init bash)" >> ~/.bashrc
-echo "eval "$(zoxide init zsh)" >> ~/.zshrc
-
 # Install fzf
 sudo apt install -y fzf
 echo "fzf --fish | source" >> ~/.config/fish/config.fish
@@ -37,22 +30,6 @@ echo "source <(fzf --zsh)" >> ~/.zshrc
 echo 'eval "$(fzf --bash)"' >> ~/.bashrc
 
 sudo apt install -y gpg
-
-# Install eza
-(type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
-    && sudo mkdir -p -m 755 /etc/apt/keyrings \
-    && out=$(mktemp) && wget -nv -qO $out https://raw.githubusercontent.com/eza-community/eza/main/deb.asc \
-    && cat $out | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg > /dev/null \
-    && sudo chmod go+r /etc/apt/keyrings/gierens.gpg \
-    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list > /dev/null \
-    && sudo apt update \
-    && sudo apt install -y eza
-
-sudo apt install -y bat
-sudo apt install -y ripgrep
-sudo apt install -y fd-find
-sudo apt install -y tldr
-sudo apt install -y tre-command
 
 # Lazygit
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
@@ -62,11 +39,5 @@ sudo install lazygit -D -t /usr/local/bin/
 
 # Act
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
-
-# Yazi
-# sudo apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick
-
-# Install just
-curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to DEST
 
 {{ end -}}
