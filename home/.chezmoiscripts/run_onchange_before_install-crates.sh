@@ -2,8 +2,13 @@
 
 set -eufo pipefail
 
-echo "Installing rust..."
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+echo "Checking for Rust installation..."
+if ! command -v cargo &> /dev/null; then
+    echo "Installing rust..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+else
+    echo "Rust is already installed"
+fi
 # shellcheck source=/dev/null
 source "$HOME/.cargo/env"
 
