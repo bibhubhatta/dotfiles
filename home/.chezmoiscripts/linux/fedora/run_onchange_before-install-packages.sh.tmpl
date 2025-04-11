@@ -1,0 +1,15 @@
+{{ if eq .osid "linux-fedora" -}}
+#!/bin/bash
+
+set -eufo pipefail
+
+echo "Updating dnf..."
+sudo dnf update -y
+
+sudo dnf install -y \
+    git \
+    fish \
+    neovim \
+    shellcheck \
+
+{{ end -}}
