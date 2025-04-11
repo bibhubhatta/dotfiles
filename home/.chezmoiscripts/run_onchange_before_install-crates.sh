@@ -14,18 +14,23 @@ echo "Installing crates..."
 cargo binstall -y \
     bandwhich \
     bat \
+    broot \
     cargo-binstall \
     dua-cli \
+    du-dust \
     erdtree \
     eza \
     fd-find \
     git-delta \
+    gping \
     grex \
     just \
     mise \
-    ouch \
     mprocs \
+    ouch \
+    procs \
     ripgrep \
+    sd \
     starship \
     tealdeer \
     yazi-cli \
