@@ -21,8 +21,8 @@ cargo binstall -y \
     bat \
     broot \
     cargo-binstall \
-    dua-cli \
     du-dust \
+    dua-cli \
     erdtree \
     eza \
     fd-find \
@@ -38,6 +38,7 @@ cargo binstall -y \
     sd \
     starship \
     tealdeer \
+    topgrade \
     yazi-cli \
     yazi-fm \
     zellij \
