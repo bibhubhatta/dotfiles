@@ -3,8 +3,16 @@
 {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
 {{- end -}}
 
+{{- $onepassword_mode := "service" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $onepassword_mode = "account" -}}
+{{- end -}}
+
 [data]
     osid = {{ $osid | quote }}
 
 [git]
   autoCommit = false
+
+[onepassword]
+  mode = {{ $onepassword_mode | quote }}
