@@ -3,7 +3,7 @@
 set -eufo pipefail
 
 echo "Checking for Rust installation..."
-if ! command -v cargo &> /dev/null; then
+if ! command -v cargo &>/dev/null; then
     echo "Installing rust..."
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal -y
     # shellcheck source=/dev/null
@@ -16,7 +16,10 @@ echo "Installing cargo-binstall..."
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 
 echo "Installing crates..."
-cargo binstall -y \
+cargo binstall \
+    --no-confirm \
+    --disable-strategies compile \
+    --continue-on-failure \
     bandwhich \
     bat \
     broot \
