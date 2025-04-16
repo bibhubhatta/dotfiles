@@ -22,7 +22,6 @@ cargo binstall \
     --continue-on-failure \
     bandwhich \
     bat \
-    broot \
     cargo-binstall \
     du-dust \
     dua-cli \
