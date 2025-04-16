@@ -19,6 +19,7 @@ packages:
       - "git"
       - "git-delta"
       - "grex"
+      - "hougesen/tap/mdsf"
       - "just"
       - "lazydocker"
       - "lazygit"
