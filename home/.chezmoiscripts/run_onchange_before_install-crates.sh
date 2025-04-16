@@ -33,7 +33,6 @@ cargo binstall \
     gping \
     grex \
     just \
-    mise \
     mprocs \
     ouch \
     procs \
@@ -46,3 +45,6 @@ cargo binstall \
     yazi-fm \
     zellij \
     zoxide
+
+echo "Installing crates that don't work well with cargo-binstall..."
+curl https://mise.run | MISE_INSTALL_PATH=/usr/local/bin/mise sh
