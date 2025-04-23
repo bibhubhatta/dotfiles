@@ -42,4 +42,10 @@ if status is-interactive
     abbr --add --position anywhere -- "--help" "--help | bat --language=help --style=plain"
     abbr --add --position anywhere -- "-h" "-h | bat --language=help --style=plain"
 
+    # replacements for common commands
+    abbr --add "cat" "bat"
+    abbr --add "cd" "z"
+    abbr --add "find" "fd"
+    abbr --add "grep" "rg"
+    abbr --add "ls" "eza"
 end
