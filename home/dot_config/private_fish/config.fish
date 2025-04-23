@@ -34,4 +34,12 @@ if status is-interactive
     abbr --add "gps" "git push"
     abbr --add "gs" "git status"
     abbr --add "gsw" "git switch"
+
+    # eza
+    abbr --add "e" "eza"
+
+    # format help with bat
+    abbr --add --position anywhere -- "--help" "--help | bat --language=help --style=plain"
+    abbr --add --position anywhere -- "-h" "-h | bat --language=help --style=plain"
+
 end
