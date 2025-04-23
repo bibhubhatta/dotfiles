@@ -48,4 +48,10 @@ if status is-interactive
     abbr --add "find" "fd"
     abbr --add "grep" "rg"
     abbr --add "ls" "eza"
+
+    # macOS specific abbreviations
+    if test (uname) = "Darwin"
+        abbr --add "o" "open"
+        abbr --add "pbc" "pbcopy"
+    end
 end
