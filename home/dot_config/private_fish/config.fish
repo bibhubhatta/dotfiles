@@ -43,7 +43,7 @@ if status is-interactive
     abbr --add "ga" "git add"
     abbr --add "gc" "git commit"
     abbr --add "gcl" "git clone"
-    abbr --add "gcm" "git commit -m"
+    abbr --add --set-cursor "gcm" "git commit -m \"%\"" 
     abbr --add "gco" "git checkout"
     abbr --add "gpl" "git pull"
     abbr --add "gps" "git push"
