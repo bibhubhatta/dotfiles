@@ -54,4 +54,15 @@ if status is-interactive
         abbr --add "o" "open"
         abbr --add "pbc" "pbcopy"
     end
+
+    # helper functions
+    function mkcd
+        set -l dir $argv[1]
+        if test -z "$dir"
+            echo "Usage: mkcd <directory>"
+            return 1
+        end
+        mkdir -p $dir
+        cd $dir
+    end
 end
