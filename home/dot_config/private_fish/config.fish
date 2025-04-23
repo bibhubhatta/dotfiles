@@ -35,6 +35,7 @@ if status is-interactive
     # source tools
     zoxide init fish | source
     atuin init fish --disable-up-arrow | source
+    starship init fish | source
     ## fzf.fish plugin is installed, so no need to source it
     # fzf --fish | source
 
