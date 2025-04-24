@@ -36,6 +36,16 @@ if test -d "$HOMEBREW_PREFIX"
 end
 
 if status is-interactive
+    # configurations
+    ## fzf.fish
+    ### Map file search to Ctrl+f instead of Ctrl+Alt+f
+    ### and use Ctrl+Alt+r for history as Ctrl+r will be used by atuin
+    fzf_configure_bindings --directory=\cf \
+                           --history=\e\cr \
+                           --git_log=\cg \
+                           --git_status=\cs \
+                           --processes=\cp
+
     # source tools
     zoxide init fish | source
     atuin init fish --disable-up-arrow | source
