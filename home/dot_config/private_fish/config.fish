@@ -57,6 +57,7 @@ if status is-interactive
 
     # eza
     abbr --add e eza
+    abbr --add ee "eza --all --long --git"
 
     # format help with bat
     abbr --add --position anywhere -- --help "--help | bat --language=help --style=plain"
