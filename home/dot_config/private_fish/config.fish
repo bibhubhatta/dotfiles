@@ -71,6 +71,11 @@ if status is-interactive
         abbr --add pbc pbcopy
     end
 
+    # misc
+    abbr --add j just
+    abbr --add c clear
+    abbr --add --position anywhere --set-cursor cnfg ~/.config/%
+
     # helper functions
     function mkcd
         set -l dir $argv[1]
