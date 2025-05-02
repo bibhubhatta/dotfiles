@@ -39,6 +39,7 @@
         autoupdate = true
 [core]
         excludesfile = ~/.config/git/ignore
+        autocrlf = input
 [rebase]
         autoSquash = true
         autoStash = true
