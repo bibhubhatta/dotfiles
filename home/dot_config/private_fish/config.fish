@@ -57,6 +57,7 @@ if status is-interactive
     # format help with bat
     abbr --add --position anywhere -- --help "--help | bat --language=help --style=plain"
     abbr --add --position anywhere -- -h "-h | bat --language=help --style=plain"
+    abbr --add --set-cursor man "man % | bat --language=man --style=plain"
 
     # replacements for common commands
     abbr --add cat bat
