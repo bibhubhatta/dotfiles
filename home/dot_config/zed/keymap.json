@@ -1,0 +1,13 @@
+[
+  {
+    "bindings": {
+      "shift shift": "command_palette::Toggle"
+    }
+  },
+  {
+    "context": "CommandPalette",
+    "bindings": {
+      "shift": "file_finder::Toggle"
+    }
+  }
+]
