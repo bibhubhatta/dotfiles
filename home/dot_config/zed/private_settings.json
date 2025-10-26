@@ -25,12 +25,12 @@
   "format_on_save": "on",
   "formatter": "language_server",
   "autosave": "on_focus_change",
-  "assistant": {
+  "agent": {
+    "default_profile": "write",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4o"
-    },
-    "version": "2"
+      "model": "claude-sonnet-4.5"
+    }
   },
   "telemetry": {
     "diagnostics": false,
