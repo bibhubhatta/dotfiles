@@ -14,5 +14,9 @@
 [git]
   autoCommit = false
 
+[diff]
+  command = "difft"
+  args = ["{{ .Destination }}", "{{ .Target }}"]
+
 [onepassword]
   mode = {{ $onepassword_mode | quote }}
