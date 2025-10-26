@@ -19,7 +19,6 @@
   "vim": {
     "toggle_relative_line_numbers": true
   },
-  // "relative_line_numbers": true,
   "soft_wrap": "preferred_line_length",
   "enable_language_server": true,
   "ensure_final_newline_on_save": true,
