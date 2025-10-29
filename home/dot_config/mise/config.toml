@@ -29,11 +29,14 @@ sd = "latest"
 shellcheck = "latest"
 sops = "latest"
 starship = "latest"
+taplo = "latest"
 uv = "latest"
 watchexec = "latest"
 yazi = "latest"
 zellij = "latest"
 zoxide = "latest"
+prettier = "latest"
+biome = "latest"
 
 [settings]
 experimental = true

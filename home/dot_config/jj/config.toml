@@ -11,3 +11,35 @@ tug- = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
 [ui]
 editor = "nvim"
 diff-formatter = ["difft", "--color=always", "$left", "$right"]
+
+[fix.tools.biome]
+command = ["biome", "check", "--stdin-file-path=$path", "--write"]
+patterns = [
+  "glob:'**/*.js'",
+  "glob:'**/*.jsx'",
+  "glob:'**/*.ts'",
+  "glob:'**/*.tsx'",
+]
+
+[fix.tools.prettier]
+command = ["prettier", "--stdin-filepath", "$path"]
+patterns = [
+  "glob:'**/*.json'",
+  "glob:'**/*.html'",
+  "glob:'**/*.md'",
+  "glob:'**/*.css'",
+  "glob:'**/*.yaml'",
+  "glob:'**/*.yml'",
+]
+
+[fix.tools.ruff]
+command = ["ruff", "-", "--stdin-filename=$path"]
+patterns = ["glob:'**/*.py'"]
+
+[fix.tools.rustfmt]
+command = ["rustfmt", "--emit", "stdout", "--edition", "2024"]
+patterns = ["glob:'**/*.rs'"]
+
+[fix.tools.taplo]
+command = ["taplo", "fmt", "-"]
+patterns = ["glob:'**/*.toml'"]
