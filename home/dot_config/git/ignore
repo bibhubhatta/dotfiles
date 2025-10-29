@@ -192,3 +192,6 @@ tags
 
 # User settings
 xcuserdata/
+
+## Misc
+**/.claude/settings.local.json
