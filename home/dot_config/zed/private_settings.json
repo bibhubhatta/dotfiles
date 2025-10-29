@@ -24,7 +24,6 @@
   "enable_language_server": true,
   "ensure_final_newline_on_save": true,
   "format_on_save": "on",
-  "formatter": "language_server",
   "autosave": "on_focus_change",
   "agent": {
     "default_profile": "write",
