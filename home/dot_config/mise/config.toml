@@ -37,6 +37,7 @@ zellij = "latest"
 zoxide = "latest"
 prettier = "latest"
 biome = "latest"
+"cargo:starship-jj" = "latest"
 
 [settings]
 experimental = true
