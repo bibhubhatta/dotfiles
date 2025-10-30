@@ -33,8 +33,8 @@ patterns = [
 ]
 
 [fix.tools.ruff]
-command = ["ruff", "-", "--stdin-filename=$path"]
-patterns = ["glob:'**/*.py'"]
+command = ["ruff", "format", "--stdin-filename=$path"]
+patterns = ["glob:'**/*.py'", "glob:'**/*.ipynb'"]
 
 [fix.tools.rustfmt]
 command = ["rustfmt", "--emit", "stdout", "--edition", "2024"]
