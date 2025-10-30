@@ -3,6 +3,7 @@ EDITOR = "nvim"
 [tools]
 act = "latest"
 age = "latest"
+aichat = "latest"
 atuin = "latest"
 bat = "latest"
 chezmoi = "latest"
@@ -37,6 +38,8 @@ zellij = "latest"
 zoxide = "latest"
 prettier = "latest"
 biome = "latest"
+"cargo:starship-jj" = "latest"
+fnox = "latest"
 
 [settings]
 experimental = true
