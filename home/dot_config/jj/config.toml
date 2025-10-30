@@ -18,6 +18,7 @@ pager = [
   "less -FRX",
 ] # See https://github.com/jj-vcs/jj/discussions/4690#discussioncomment-12072223
 diff-formatter = ":git"
+conflict-marker-style = "git"
 
 [fix.tools.biome]
 command = ["biome", "check", "--stdin-file-path=$path", "--write"]
