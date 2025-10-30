@@ -43,3 +43,7 @@ patterns = ["glob:'**/*.rs'"]
 [fix.tools.taplo]
 command = ["taplo", "fmt", "-"]
 patterns = ["glob:'**/*.toml'"]
+
+[experimental-advance-branches]
+enabled-branches = ["glob:*"]
+disabled-branches = ["main", "glob:push-*"]
