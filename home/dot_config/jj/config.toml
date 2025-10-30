@@ -43,6 +43,10 @@ patterns = [
   "glob:'**/*.yml'",
 ]
 
+[fix.tools.ruff_sort_import]
+command = ["ruff", "check", "--select", "I", "--fix", "--stdin-filename=$path"]
+patterns = ["glob:'**/*.py'", "glob:'**/*.ipynb'"]
+
 [fix.tools.ruff]
 command = ["ruff", "format", "--stdin-filename=$path"]
 patterns = ["glob:'**/*.py'", "glob:'**/*.ipynb'"]
