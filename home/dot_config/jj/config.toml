@@ -20,6 +20,9 @@ pager = [
 diff-formatter = ":git"
 conflict-marker-style = "git"
 
+[template-aliases]
+'format_short_signature(signature)' = 'signature.name()'
+
 [fix.tools.biome]
 command = ["biome", "check", "--stdin-file-path=$path", "--write"]
 patterns = [
