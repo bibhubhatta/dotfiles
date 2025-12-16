@@ -8,19 +8,28 @@
 // from the command palette or from `Zed` application menu.
 {
   "base_keymap": "JetBrains",
-  "features": {
-    "edit_prediction_provider": "zed"
-  },
   "theme": {
     "mode": "system",
     "light": "Catppuccin Latte",
     "dark": "Catppuccin Mocha"
   },
+  "project_panel": {
+    "folder_icons": false
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
+  "soft_wrap": "preferred_line_length",
   "vim_mode": true,
   "vim": {
     "toggle_relative_line_numbers": true
   },
-  "soft_wrap": "preferred_line_length",
+  "which_key": {
+    "enabled": true,
+    "delay_ms": 0
+  },
   "enable_language_server": true,
   "ensure_final_newline_on_save": true,
   "format_on_save": "on",
@@ -29,8 +38,14 @@
     "default_profile": "write",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4.5"
+      "model": "grok-code-fast-1"
     }
+  },
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "edit_predictions": {
+    "mode": "eager"
   },
   "telemetry": {
     "diagnostics": false,
