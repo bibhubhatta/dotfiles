@@ -13,14 +13,10 @@ editor = "nvim"
 # diff-formatter = ["difft", "--color=always", "$left", "$right"]
 
 # Use delta for formatting diffs -- diff needs to be formatted in git
-pager = [
-  "delta",
-  "--pager",
-  "less -FRX",
-] # See https://github.com/jj-vcs/jj/discussions/4690#discussioncomment-12072223
-diff-formatter = ":git"
+# pager = ["delta", "--pager", "less -FRX"] # See https://github.com/jj-vcs/jj/discussions/4690#discussioncomment-12072223
+# diff-formatter = ":git"
 
-conflict-marker-style = "git"
+# conflict-marker-style = "git"
 
 [git]
 # Prevent pushing work in progress or anything explicitly labeled "private"
