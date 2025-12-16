@@ -22,6 +22,10 @@ diff-formatter = ":git"
 
 conflict-marker-style = "git"
 
+[git]
+# Prevent pushing work in progress or anything explicitly labeled "private"
+private-commits = "description(glob:'wip:*') | description(glob:'private:*')"
+
 [template-aliases]
 'format_short_signature(signature)' = 'signature.name()'
 
