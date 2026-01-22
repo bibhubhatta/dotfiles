@@ -1,18 +1,3 @@
-if status is-interactive
-    fish_vi_key_bindings
-    # git abbreviations
-    abbr --add "g" "git"
-    abbr --add "ga" "git add"
-    abbr --add "gc" "git commit"
-    abbr --add "gcl" "git clone"
-    abbr --add "gcm" "git commit -m"
-    abbr --add "gco" "git checkout"
-    abbr --add "gpl" "git pull"
-    abbr --add "gps" "git push"
-    abbr --add "gs" "git status"
-    abbr --add "gsw" "git switch"
-end
-
 # homebrew
 # https://github.com/orgs/Homebrew/discussions/4412#discussioncomment-8651316
 if test -d /home/linuxbrew/.linuxbrew # Linux
@@ -39,15 +24,17 @@ end
 ~/.local/bin/mise activate fish | source # added by https://mise.run/fish
 
 if status is-interactive
+    fish_vi_key_bindings
+
     # configurations
     ## fzf.fish
     ### Map file search to Ctrl+f instead of Ctrl+Alt+f
     ### and use Ctrl+Alt+r for history as Ctrl+r will be used by atuin
     fzf_configure_bindings --directory=\cf \
-                           --history=\e\cr \
-                           --git_log=\cg \
-                           --git_status=\cs \
-                           --processes=\cp
+        --history=\e\cr \
+        --git_log=\cg \
+        --git_status=\cs \
+        --processes=\cp
 
     # source tools
     zoxide init fish | source
@@ -79,7 +66,6 @@ if status is-interactive
 
     # replacements for common commands
     abbr --add cat bat
-    abbr --add cd z
     abbr --add find fd
     abbr --add grep rg
     abbr --add ls eza
@@ -91,7 +77,7 @@ if status is-interactive
     end
 
     # misc
-    abbr --add j just
+    abbr --add j jjui
     abbr --add c clear
     abbr --add --position anywhere --set-cursor cnfg ~/.config/%
 
@@ -105,4 +91,5 @@ if status is-interactive
         mkdir -p $dir
         cd $dir
     end
+
 end
