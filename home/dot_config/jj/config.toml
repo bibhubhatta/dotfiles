@@ -61,6 +61,10 @@ patterns = ["glob:'**/*.rs'"]
 command = ["taplo", "fmt", "-"]
 patterns = ["glob:'**/*.toml'"]
 
+[fix.tools.keep-sorted]
+command = ["keep-sorted", "-"]
+patterns = ["glob:'**/*'"]
+
 # [experimental-advance-branches]
 # enabled-branches = ["glob:*"]
 # disabled-branches = ["main", "glob:push-*"]
