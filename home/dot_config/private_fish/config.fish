@@ -35,6 +35,9 @@ if test -d "$HOMEBREW_PREFIX"
 
 end
 
+# mise
+~/.local/bin/mise activate fish | source # added by https://mise.run/fish
+
 if status is-interactive
     # configurations
     ## fzf.fish
