@@ -7,6 +7,9 @@ email = "82817444+bibhubhatta@users.noreply.github.com"
 [aliases]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@"]
 tug- = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+rebase-all = ["rebase", "-s", "(::trunk())+ & mutable()", "-o", "trunk()"]
+# mega merge commit
+mm = ["new", "-r", "heads(trunk():: & ~trunk())"]
 
 [ui]
 editor = "nvim"
