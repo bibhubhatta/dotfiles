@@ -1,3 +1,5 @@
 theme = dark:Catppuccin Mocha,light:Catppuccin Latte
 keybind = shift+enter=text:\n
 keybind = global:option+backquote=toggle_quick_terminal
+
+window-save-state = always
