@@ -1,0 +1,44 @@
+{{ if eq .chezmoi.os "linux" -}}
+{{ if (.chezmoi.osRelease.id | eq "arch") -}}
+#!/usr/bin/env bash
+# Install keyd and configure dual-function Capslock/Enter.
+#   Capslock: tap = Esc, hold = Ctrl
+#   Enter:    tap = Enter, hold = Ctrl (with timeout guard to avoid misfires while typing)
+
+set -euo pipefail
+
+KEYD_CONFIG='[ids]
+*
+
+[main]
+capslock = overload(control, esc)
+enter = overloadt2(control, enter, 200)
+'
+
+if ! command -v keyd >/dev/null 2>&1; then
+  sudo pacman -S --needed --noconfirm keyd
+fi
+
+if ! getent group keyd >/dev/null; then
+  sudo groupadd -r keyd
+fi
+
+TARGET=/etc/keyd/default.conf
+if [[ ! -f "$TARGET" ]] || ! printf '%s' "$KEYD_CONFIG" | sudo cmp -s - "$TARGET"; then
+  sudo install -D -m 0644 /dev/null "$TARGET"
+  printf '%s' "$KEYD_CONFIG" | sudo tee "$TARGET" >/dev/null
+  CONFIG_CHANGED=1
+else
+  CONFIG_CHANGED=0
+fi
+
+if ! systemctl is-enabled --quiet keyd.service; then
+  sudo systemctl enable keyd.service
+fi
+if ! systemctl is-active --quiet keyd.service; then
+  sudo systemctl start keyd.service
+elif [[ "$CONFIG_CHANGED" -eq 1 ]]; then
+  sudo keyd reload
+fi
+{{ end -}}
+{{ end -}}
