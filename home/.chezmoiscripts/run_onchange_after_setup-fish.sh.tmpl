@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Install fish and set it as the default login shell.
+
+set -euo pipefail
+
+if ! command -v fish >/dev/null 2>&1; then
+{{- if eq .chezmoi.os "darwin" }}
+  brew install fish
+{{- else if eq .chezmoi.os "linux" }}
+{{-   if eq .chezmoi.osRelease.id "arch" }}
+  sudo pacman -S --needed --noconfirm fish
+{{-   else if has .chezmoi.osRelease.id (list "debian" "ubuntu") }}
+  sudo apt-get update -qq
+  sudo apt-get install -y fish
+{{-   else }}
+  echo "Unsupported Linux distro: {{ .chezmoi.osRelease.id }}" >&2
+  exit 1
+{{-   end }}
+{{- else }}
+  echo "Unsupported OS: {{ .chezmoi.os }}" >&2
+  exit 1
+{{- end }}
+fi
+
+FISH_BIN="$(command -v fish)"
+
+if ! grep -qxF "$FISH_BIN" /etc/shells; then
+  echo "$FISH_BIN" | sudo tee -a /etc/shells >/dev/null
+fi
+
+CURRENT_SHELL="$(getent passwd "$USER" 2>/dev/null | cut -d: -f7 || dscl . -read "/Users/$USER" UserShell 2>/dev/null | awk '{print $2}')"
+if [[ "$CURRENT_SHELL" != "$FISH_BIN" ]]; then
+  sudo chsh -s "$FISH_BIN" "$USER"
+fi
