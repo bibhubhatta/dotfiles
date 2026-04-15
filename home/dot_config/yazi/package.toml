@@ -1,0 +1,54 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "442d908"
+hash = "6fa6a05a81c98dd000fbca3cca6e9682"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "442d908"
+hash = "187cc58ba7ac3befd49c342129e6f1b6"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "442d908"
+hash = "6849444b7c2df08eace83f3f86fb55a3"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "442d908"
+hash = "f0c8c378184d5f8abd1b095a443d336d"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mime-ext"
+rev = "442d908"
+hash = "ffa64f216083fb7333afc1ebbf73cc01"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:max-preview"
+rev = "442d908"
+hash = "99aa06d3014798d86001c324468d497f"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:zoxide"
+rev = "442d908"
+hash = "99aa06d3014798d86001c324468d497f"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:fzf"
+rev = "442d908"
+hash = "99aa06d3014798d86001c324468d497f"
+
+[[plugin.deps]]
+use = "KKV9/compress"
+rev = "46a6b9f"
+hash = "771af2becc575a3f43d0542de823969d"
+
+[[plugin.deps]]
+use = "Rolv-Apneseth/starship"
+rev = "a837101"
+hash = "635b0feb9215772d22020eb0abf0bb34"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "0670801"
+hash = "7dfe41c9c3d9be76da8a844263d0bbed"
