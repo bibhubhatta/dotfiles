@@ -1,0 +1,27 @@
+{{ if eq .chezmoi.os "linux" -}}
+{{ if (.chezmoi.osRelease.id | eq "arch") -}}
+#!/usr/bin/env bash
+# Install Bluetooth stack and enable the service.
+# The MT7925 combo chip needs btusb (loads btmtk automatically) plus bluez/bluez-utils.
+
+set -euo pipefail
+
+sudo pacman -S --needed --noconfirm bluez bluez-utils
+
+# Ensure btusb loads on boot (needed for combo Wi-Fi/BT chips like MT7925)
+if [[ ! -f /etc/modules-load.d/btusb.conf ]] || ! grep -q '^btusb$' /etc/modules-load.d/btusb.conf; then
+  echo 'btusb' | sudo tee /etc/modules-load.d/btusb.conf >/dev/null
+fi
+
+if ! lsmod | grep -q '^btusb'; then
+  sudo modprobe btusb
+fi
+
+if ! systemctl is-enabled --quiet bluetooth.service; then
+  sudo systemctl enable bluetooth.service
+fi
+if ! systemctl is-active --quiet bluetooth.service; then
+  sudo systemctl start bluetooth.service
+fi
+{{ end -}}
+{{ end -}}
