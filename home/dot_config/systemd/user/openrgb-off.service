@@ -1,0 +1,11 @@
+[Unit]
+Description=Turn off all OpenRGB-controlled LEDs at login
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/openrgb --noautoconnect --mode off
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
