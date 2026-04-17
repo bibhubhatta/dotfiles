@@ -1,0 +1,18 @@
+{{ if eq .chezmoi.os "linux" -}}
+{{ if (.chezmoi.osRelease.id | eq "arch") -}}
+#!/usr/bin/env bash
+# Install OpenRGB for controlling motherboard/peripheral RGB.
+# Targets the ASRock Polychrome USB HID controller (26ce:01a2) on beast,
+# but also supports any other RGB device OpenRGB knows about.
+# The package ships /usr/lib/udev/rules.d/60-openrgb.rules that grants
+# unprivileged hidraw access.
+
+set -euo pipefail
+
+sudo pacman -S --needed --noconfirm openrgb
+
+# Reload udev so the shipped rules apply without requiring a reboot.
+sudo udevadm control --reload-rules
+sudo udevadm trigger --subsystem-match=usb --subsystem-match=hidraw --subsystem-match=i2c-dev
+{{ end -}}
+{{ end -}}
