@@ -14,5 +14,13 @@ sudo pacman -S --needed --noconfirm openrgb
 # Reload udev so the shipped rules apply without requiring a reboot.
 sudo udevadm control --reload-rules
 sudo udevadm trigger --subsystem-match=usb --subsystem-match=hidraw --subsystem-match=i2c-dev
+
+# Pick up the openrgb-off user service and ensure it runs at login so
+# the motherboard LEDs stay off across reboots.
+systemctl --user daemon-reload
+if ! systemctl --user is-enabled --quiet openrgb-off.service; then
+  systemctl --user enable openrgb-off.service
+fi
+systemctl --user restart openrgb-off.service
 {{ end -}}
 {{ end -}}
