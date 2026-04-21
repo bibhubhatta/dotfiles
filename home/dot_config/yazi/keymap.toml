@@ -1,0 +1,34 @@
+[[mgr.prepend_keymap]]
+on = "T"
+run = "plugin max-preview"
+desc = "Maximize or restore preview"
+
+[[mgr.prepend_keymap]]
+on = ["c", "p"]
+run = ''' shell --confirm 'clip() { if command -v pbcopy >/dev/null 2>&1; then pbcopy; elif command -v wl-copy >/dev/null 2>&1; then wl-copy; elif command -v xclip >/dev/null 2>&1; then xclip -selection clipboard; elif command -v xsel >/dev/null 2>&1; then xsel --clipboard --input; fi; }; echo -n "$@" | clip' '''
+desc = "Copy absolute path"
+
+[[mgr.prepend_keymap]]
+on = ["c", "n"]
+run = ''' shell --confirm 'clip() { if command -v pbcopy >/dev/null 2>&1; then pbcopy; elif command -v wl-copy >/dev/null 2>&1; then wl-copy; elif command -v xclip >/dev/null 2>&1; then xclip -selection clipboard; elif command -v xsel >/dev/null 2>&1; then xsel --clipboard --input; fi; }; basename "$1" | tr -d "\n" | clip' '''
+desc = "Copy filename"
+
+[[mgr.prepend_keymap]]
+on = ["c", "d"]
+run = ''' shell --confirm 'clip() { if command -v pbcopy >/dev/null 2>&1; then pbcopy; elif command -v wl-copy >/dev/null 2>&1; then wl-copy; elif command -v xclip >/dev/null 2>&1; then xclip -selection clipboard; elif command -v xsel >/dev/null 2>&1; then xsel --clipboard --input; fi; }; dirname "$1" | tr -d "\n" | clip' '''
+desc = "Copy directory"
+
+[[mgr.prepend_keymap]]
+on = "<Enter>"
+run = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+[[mgr.prepend_keymap]]
+on = "z"
+run = "plugin zoxide"
+desc = "Jump via zoxide"
+
+[[mgr.prepend_keymap]]
+on = "Z"
+run = "plugin fzf"
+desc = "Jump via fzf"
