@@ -67,6 +67,7 @@ yazi = "latest"
 yt-dlp = "latest"
 zellij = "latest"
 zoxide = "latest"
+ktlint = "latest"
 # keep-sorted end
 
 [settings]
