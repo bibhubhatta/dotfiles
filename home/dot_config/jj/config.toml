@@ -56,6 +56,15 @@ patterns = ["glob:'**/*.py'", "glob:'**/*.ipynb'"]
 command = ["ruff", "format", "--stdin-filename=$path"]
 patterns = ["glob:'**/*.py'", "glob:'**/*.ipynb'"]
 
+[fix.tools.ktlint]
+# Goes through a wrapper because ktlint 1.8's `--format --stdin` output path
+# crashes (UnknownFormatConversionException) on source containing the `%`
+# modulo operator. The wrapper materializes stdin to a temp file alongside the
+# real source path (so .editorconfig discovery still works) and runs ktlint in
+# file mode, which doesn't hit the buggy printf.
+command = ["jj-fix-ktlint", "$path"]
+patterns = ["glob:'**/*.kt'", "glob:'**/*.kts'"]
+
 [fix.tools.rustfmt]
 command = ["rustfmt", "--emit", "stdout", "--edition", "2024"]
 patterns = ["glob:'**/*.rs'"]
