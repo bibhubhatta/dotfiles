@@ -3,11 +3,11 @@ local M = {}
 function M:peek(job)
 	local limit = job.area.h
 	local child = Command("hexyl")
-		:args({
+		:arg({
 			"--border", "none",
 			"--terminal-width", tostring(job.area.w),
 			"--color", "always",
-			"--skip-offset", tostring(job.skip * 16),
+			"--skip", tostring(job.skip * 16),
 			"--length", tostring(limit * 16),
 			tostring(job.file.url),
 		})
@@ -35,17 +35,22 @@ function M:peek(job)
 	child:start_kill()
 
 	if i == 0 and job.skip > 0 then
-		ya.manager_emit("peek", { tostring(math.max(0, job.skip - limit)), only_if = tostring(job.file.url), upper_bound = "" })
+		ya.emit("peek", { math.max(0, job.skip - limit), only_if = job.file.url, upper_bound = true })
 	else
 		ya.preview_widget(job, { ui.Text.parse(lines):area(job.area) })
 	end
 end
 
 function M:seek(job)
-	local h = cx.active.preview.area.h
-	local step = math.floor(job.units * h / 10)
-	local new_skip = math.max(0, cx.active.preview.skip + step)
-	ya.manager_emit("peek", { tostring(new_skip), only_if = tostring(job.file.url), upper_bound = "" })
+	local h = cx.active.current.hovered
+	if not h or h.url ~= job.file.url then
+		return
+	end
+
+	local step = math.floor(job.units * job.area.h / 10)
+	step = step == 0 and ya.clamp(-1, job.units, 1) or step
+
+	ya.emit("peek", { math.max(0, cx.active.preview.skip + step), only_if = job.file.url })
 end
 
 return M
