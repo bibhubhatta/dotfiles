@@ -85,3 +85,9 @@
 	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
 [mergetool]
 	prompt = false
+[credential "https://github.com"]
+	helper = 
+	helper = !/home/bibhu/.local/share/mise/shims/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/home/bibhu/.local/share/mise/shims/gh auth git-credential
