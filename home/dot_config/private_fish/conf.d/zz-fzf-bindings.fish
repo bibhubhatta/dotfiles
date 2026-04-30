@@ -1,7 +1,7 @@
 status is-interactive; or exit
 functions -q fzf_configure_bindings; or exit
 
-# File search on Ctrl+F; Ctrl+Alt+R for fzf history (Ctrl+R is atuin).
+# File search on Ctrl+F; Ctrl+Alt+R for fzf history (Ctrl+R is atuin, see zzz-atuin.fish).
 fzf_configure_bindings --directory=\cf \
     --history=\e\cr \
     --git_log=\cg \
