@@ -7,12 +7,17 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "base_keymap": "JetBrains",
-  "theme": {
-    "mode": "system",
-    "light": "Catppuccin Latte",
-    "dark": "Catppuccin Mocha"
+  "cli_default_open_behavior": "existing_window",
+  "session": {
+    "trust_all_worktrees": true
   },
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
+  "icon_theme": "Zed (Default)",
+  "base_keymap": "VSCode",
   "project_panel": {
     "folder_icons": false
   },
@@ -21,7 +26,7 @@
       "enabled": true
     }
   },
-  "soft_wrap": "preferred_line_length",
+  "soft_wrap": "editor_width",
   "vim_mode": true,
   "vim": {
     "toggle_relative_line_numbers": true
@@ -41,14 +46,13 @@
       "model": "grok-code-fast-1"
     }
   },
-  "features": {
-    "edit_prediction_provider": "zed"
-  },
   "edit_predictions": {
+    "provider": "zed",
     "mode": "eager"
   },
   "telemetry": {
     "diagnostics": false,
     "metrics": false
-  }
+  },
+  "theme": "Omazed"
 }
