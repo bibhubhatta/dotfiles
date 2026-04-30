@@ -24,21 +24,6 @@ rev = "442d908"
 hash = "ffa64f216083fb7333afc1ebbf73cc01"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:max-preview"
-rev = "442d908"
-hash = "99aa06d3014798d86001c324468d497f"
-
-[[plugin.deps]]
-use = "yazi-rs/plugins:zoxide"
-rev = "442d908"
-hash = "99aa06d3014798d86001c324468d497f"
-
-[[plugin.deps]]
-use = "yazi-rs/plugins:fzf"
-rev = "442d908"
-hash = "99aa06d3014798d86001c324468d497f"
-
-[[plugin.deps]]
 use = "KKV9/compress"
 rev = "46a6b9f"
 hash = "771af2becc575a3f43d0542de823969d"
@@ -47,6 +32,11 @@ hash = "771af2becc575a3f43d0542de823969d"
 use = "Rolv-Apneseth/starship"
 rev = "a837101"
 hash = "635b0feb9215772d22020eb0abf0bb34"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "3f2b882"
+hash = "15e5b67a241172cbb86b8fbf9e63692"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
