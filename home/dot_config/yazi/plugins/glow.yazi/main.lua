@@ -2,7 +2,7 @@ local M = {}
 
 function M:peek(job)
 	local child = Command("glow")
-		:args({ "-s", "dark", "-w", tostring(job.area.w), tostring(job.file.url) })
+		:arg({ "-s", "dark", "-w", tostring(job.area.w), tostring(job.file.url) })
 		:stdout(Command.PIPED)
 		:stderr(Command.PIPED)
 		:spawn()
@@ -32,17 +32,22 @@ function M:peek(job)
 	child:start_kill()
 
 	if job.skip > 0 and i < job.skip + limit then
-		ya.manager_emit("peek", { tostring(math.max(0, i - limit)), only_if = tostring(job.file.url), upper_bound = "" })
+		ya.emit("peek", { math.max(0, i - limit), only_if = job.file.url, upper_bound = true })
 	else
 		ya.preview_widget(job, { ui.Text.parse(lines):area(job.area) })
 	end
 end
 
 function M:seek(job)
-	local h = cx.active.preview.area.h
-	local step = math.floor(job.units * h / 10)
-	local new_skip = math.max(0, cx.active.preview.skip + step)
-	ya.manager_emit("peek", { tostring(new_skip), only_if = tostring(job.file.url), upper_bound = "" })
+	local h = cx.active.current.hovered
+	if not h or h.url ~= job.file.url then
+		return
+	end
+
+	local step = math.floor(job.units * job.area.h / 10)
+	step = step == 0 and ya.clamp(-1, job.units, 1) or step
+
+	ya.emit("peek", { math.max(0, cx.active.preview.skip + step), only_if = job.file.url })
 end
 
 return M
