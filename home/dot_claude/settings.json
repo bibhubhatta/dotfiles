@@ -1,11 +1,12 @@
 {
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "opus"
   },
   "permissions": {
-    "defaultMode": "auto"
+    "defaultMode": "bypassPermissions"
   },
-  "model": "fable",
+  "model": "opus",
   "hooks": {
     "PostToolUse": [
       {
@@ -39,6 +40,18 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/home/bibhu/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
   "worktree": {
@@ -63,7 +76,7 @@
       "effortLevel": "high"
     },
     "claude-opus-5": {
-      "effortLevel": "xhigh"
+      "effortLevel": "high"
     },
     "claude-fable-5-1": {
       "effortLevel": "high"
