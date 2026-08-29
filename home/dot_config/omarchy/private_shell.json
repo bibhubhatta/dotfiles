@@ -27,7 +27,8 @@
           "id": "omarchy.menu"
         },
         {
-          "id": "omarchy.workspaces"
+          "id": "workspaces-monitor",
+          "type": "qml"
         }
       ],
       "right": [
