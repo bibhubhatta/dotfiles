@@ -1,0 +1,7 @@
+# Changes require a restart to take effect.
+#
+# Omarchy's own drop-in (/usr/share/uwsm/env.d/10-omarchy) sets OMARCHY_PATH,
+# PATH and mise activation, so this file carries only machine-local settings.
+
+# 1080p monitors — no UI upscaling for GTK/JetBrains apps.
+export GDK_SCALE=1
