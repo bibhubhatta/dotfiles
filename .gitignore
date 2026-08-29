@@ -1,0 +1,6 @@
+# The global ignore (core.excludesfile) carries `*.d` from a C template, meant
+# for compiler dependency files. It also matches drop-in *directories*, which is
+# how this repo stores config: uwsm/env.d, fish/conf.d. Without these negations
+# a newly added drop-in is silently untracked and never reaches another machine.
+!home/**/*.d/
+!home/**/*.d/**
