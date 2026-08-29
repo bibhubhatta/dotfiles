@@ -8,7 +8,7 @@ linemode = "size"
 show_hidden = false
 show_symlink = true
 scrolloff = 5
-mouse_events = ["click", "scroll"]
+mouse_events = ["click", "scroll", "drag"]
 
 [preview]
 wrap = "no"
@@ -24,21 +24,21 @@ ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
 edit = [
-  { run = '${EDITOR:=nvim} "$@"', desc = "$EDITOR", block = true, for = "unix" },
+  { run = '${EDITOR:=nvim} %s', desc = "$EDITOR", block = true, for = "unix" },
 ]
 open = [
-  { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
-  { run = 'open "$1"', desc = "Open", for = "macos" },
+  { run = 'xdg-open %s1', desc = "Open", for = "linux" },
+  { run = 'open %s1', desc = "Open", for = "macos" },
 ]
 reveal = [
-  { run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
-  { run = 'open -R "$1"', desc = "Reveal in Finder", for = "macos" },
-  { run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
+  { run = 'xdg-open %d1', desc = "Reveal", for = "linux" },
+  { run = 'open -R %s1', desc = "Reveal in Finder", for = "macos" },
+  { run = 'exiftool %s1; echo "Press enter to exit"; read _', block = true, desc = "Show EXIF", for = "unix" },
 ]
 extract = [
-  { run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
+  { run = 'ya pub extract --list %s', desc = "Extract here", for = "unix" },
 ]
-play = [{ run = 'mpv --force-window "$@"', orphan = true, for = "unix" }]
+play = [{ run = 'mpv --force-window %s', orphan = true, for = "unix" }]
 
 [open]
 # Only deviation from the preset rules: also offer "open" (xdg-open) for media,
@@ -52,8 +52,8 @@ fetch_workers = 5
 preload_workers = 2
 process_workers = 5
 bizarre_retry = 5
-image_alloc = 536870912  # 512 MB
-image_bound = [0, 0]
+image_alloc = 536870912      # 512 MB
+image_bound = [10000, 10000]
 suppress_preload = false
 
 [plugin]
