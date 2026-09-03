@@ -7,6 +7,14 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "proxy": "",
+  "tabs": {
+    "git_status": false
+  },
+  "use_smartcase_search": true,
+  "document_folding_ranges": "off",
+  "minimap": {},
+  "theme": "Omazed",
   "cli_default_open_behavior": "existing_window",
   "session": {
     "trust_all_worktrees": true
@@ -17,7 +25,7 @@
     }
   },
   "icon_theme": "Zed (Default)",
-  "base_keymap": "VSCode",
+  "base_keymap": "Zed",
   "project_panel": {
     "folder_icons": false
   },
@@ -26,9 +34,9 @@
       "enabled": true
     }
   },
-  "soft_wrap": "editor_width",
   "vim_mode": true,
   "vim": {
+    "use_smartcase_find": true,
     "toggle_relative_line_numbers": true
   },
   "which_key": {
@@ -37,7 +45,7 @@
   },
   "enable_language_server": true,
   "ensure_final_newline_on_save": true,
-  "format_on_save": "on",
+  "format_on_save": "modifications_if_available",
   "autosave": "on_focus_change",
   "agent": {
     "default_profile": "write",
@@ -53,6 +61,5 @@
   "telemetry": {
     "diagnostics": false,
     "metrics": false
-  },
-  "theme": "Omazed"
+  }
 }
