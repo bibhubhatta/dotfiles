@@ -7,13 +7,13 @@ import qs.Ui
 
 // Per-monitor workspace switcher.
 //
-// The stock omarchy.workspaces widget lists every workspace on every screen.
-// Workspaces here are pinned one range per monitor (see hypr/monitors.lua), so
-// each bar should show only the range belonging to the screen it is drawn on.
-//
-// The rules mark those workspaces persistent, which is what makes an idle
-// workspace exist at all — Hyprland destroys empty non-persistent ones, and a
-// workspace that does not exist has no monitor to be filtered by.
+// The stock omarchy.workspaces widget lists workspace ids 1-10 on every screen.
+// Workspaces here are split by split-monitor-workspaces (see hypr/monitors.lua):
+// each monitor owns a run of ten Hyprland workspaces, and this bar shows only
+// the run belonging to the screen it is drawn on, labelled 1-0 by position in
+// that run. The first five slots are always shown; the rest appear only while
+// they hold a window or are the active workspace, matching how the stock
+// widget reveals workspaces as they come into use.
 BarWidget {
   id: root
 
@@ -43,21 +43,35 @@ BarWidget {
     return null
   }
 
-  function workspaceIds() {
-    var ids = []
-    var values = Hyprland.workspaces.values
+  // Hyprland workspaces per monitor, as configured for split-monitor-workspaces.
+  readonly property int perMonitor: 10
+  readonly property int alwaysShown: 5
 
-    for (var i = 0; i < values.length; i++) {
-      var workspace = values[i]
-      // Negative ids are special/scratchpad workspaces, which belong to no
-      // numbered range and are reached by their own bindings.
-      if (workspace.id < 1) continue
-      if (!workspace.monitor || String(workspace.monitor.name) !== root.screenName) continue
-      if (ids.indexOf(workspace.id) === -1) ids.push(workspace.id)
+  // First Hyprland id of this monitor's run, derived from the workspace it is
+  // currently showing: runs are contiguous blocks of perMonitor ids.
+  readonly property int rangeBase: monitorActiveId > 0
+    ? Math.floor((monitorActiveId - 1) / perMonitor) * perMonitor
+    : -1
+
+  function workspaceIds() {
+    if (rangeBase < 0) return []
+
+    var ids = []
+    for (var slot = 1; slot <= alwaysShown; slot++) ids.push(rangeBase + slot)
+
+    for (var slot = alwaysShown + 1; slot <= perMonitor; slot++) {
+      var id = rangeBase + slot
+      var workspace = workspaceById(id)
+      var occupied = workspace !== null && workspace.toplevels.values.length > 0
+      if (occupied || id === monitorActiveId) ids.push(id)
     }
 
-    ids.sort(function (left, right) { return left - right })
     return ids
+  }
+
+  function labelFor(id) {
+    var slot = id - rangeBase
+    return slot === 10 ? "0" : String(slot)
   }
 
   function focusWorkspace(id) {
@@ -89,7 +103,7 @@ BarWidget {
         readonly property bool current: modelData === root.monitorActiveId
 
         bar: root.bar
-        text: current ? "󱓻" : (modelData === 10 ? "0" : String(modelData))
+        text: current ? "󱓻" : root.labelFor(modelData)
         opacity: occupied || current ? 1 : 0.5
         horizontalMargin: 6
         verticalPadding: 6
