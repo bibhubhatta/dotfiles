@@ -13,28 +13,16 @@ hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
 -- whichever is wired to DP-1 becomes "left", DP-2 becomes "right".
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = omarchy_monitor_scale })
 
--- Workspace-to-monitor bindings — 1-5 on the left port, 6-10 on the right.
--- The offset of five keeps a fixed pairing between the two screens:
--- (1,6) (2,7) (3,8) (4,9) (5,10).
+-- Workspaces are managed by the split-monitor-workspaces Lua package
+-- (~/.config/hypr/plugins/split-monitor-workspaces, branch release/0.56.x)
+-- with linked monitors: ten workspaces per monitor, numbered 1-10 on each
+-- screen, allocated in the order Hyprland reports the monitors (DP-1 owns
+-- Hyprland workspaces 1-10, DP-2 owns 11-20), persistent while empty.
 --
--- persistent keeps an idle workspace alive instead of letting Hyprland destroy
--- it when the last window closes. The per-monitor bar widget filters
--- workspaces by the monitor they sit on, and a destroyed workspace sits on no
--- monitor, so without this the bar would drop workspaces as they empty.
-for workspace = 1, 5 do
-  hl.workspace_rule({
-    workspace = tostring(workspace),
-    monitor = "DP-1",
-    default = workspace == 1,
-    persistent = true,
-  })
-end
-
-for workspace = 6, 10 do
-  hl.workspace_rule({
-    workspace = tostring(workspace),
-    monitor = "DP-2",
-    default = workspace == 6,
-    persistent = true,
-  })
-end
+-- Update the package alongside Hyprland: `git pull` inside the plugin directory
+-- and check out the matching release/0.XX.x branch after a Hyprland release.
+require("hypr.plugins.split-monitor-workspaces.init").setup({
+  -- SUPER+N switches every monitor to its own workspace N together, so
+  -- workspace 1 on the left and workspace 1 on the right act as one.
+  link_monitors = true,
+})

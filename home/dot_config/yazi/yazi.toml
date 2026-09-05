@@ -30,6 +30,10 @@ open = [
   { run = 'xdg-open %s1', desc = "Open", for = "linux" },
   { run = 'open %s1', desc = "Open", for = "macos" },
 ]
+browser = [
+  { run = 'xdg-open %s1', desc = "Open in browser", for = "linux" },
+  { run = 'open %s1', desc = "Open in browser", for = "macos" },
+]
 reveal = [
   { run = 'xdg-open %d1', desc = "Reveal", for = "linux" },
   { run = 'open -R %s1', desc = "Reveal in Finder", for = "macos" },
@@ -41,9 +45,23 @@ extract = [
 play = [{ run = 'mpv --force-window %s', orphan = true, for = "unix" }]
 
 [open]
-# Only deviation from the preset rules: also offer "open" (xdg-open) for media,
-# not just mpv. Everything else comes from Yazi's built-in rules.
-prepend_rules = [{ mime = "{audio,video}/*", use = ["play", "open", "reveal"] }]
+# Deviations from the preset rules:
+#   - media: also offer "open" (xdg-open), not just mpv.
+#   - HTML: also offer the browser. The preset's `text/*` rule catches
+#     text/html and only offers "edit", so there is no way to view a page.
+# Everything else comes from Yazi's built-in rules.
+prepend_rules = [
+  { mime = "{audio,video}/*", use = [
+    "play",
+    "open",
+    "reveal",
+  ] },
+  { mime = "text/html", use = [
+    "edit",
+    "browser",
+    "reveal",
+  ] },
+]
 
 [tasks]
 file_workers = 3

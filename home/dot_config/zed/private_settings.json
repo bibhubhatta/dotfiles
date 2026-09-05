@@ -24,7 +24,6 @@
       "type": "registry"
     }
   },
-  "icon_theme": "Zed (Default)",
   "base_keymap": "Zed",
   "project_panel": {
     "folder_icons": false

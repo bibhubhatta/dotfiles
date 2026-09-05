@@ -1,14 +1,14 @@
 {
   "bar": {
-    "centerAnchor": "omarchy.clock",
+    "centerAnchor": "bibhu.clock",
     "layout": {
       "center": [
         {
           "id": "omarchy.indicators"
         },
         {
-          "id": "omarchy.clock",
-          "format": "ddd d MMM HH:mm",
+          "id": "bibhu.clock",
+          "format": "ddd d MMM HH:mm:ss",
           "formatAlt": "d MMMM 'W'ww yyyy",
           "verticalFormat": "HH\n—\nmm"
         },
