@@ -120,6 +120,23 @@ How to report:
 
 The goal is to keep the user informed of risks they might otherwise miss — silent discoveries are worse than noisy ones.
 
+## File Reads, Searches, and Edits
+
+Use the native file tools — `Read`, `Edit`, `Write`, `Glob`, `Grep`, `NotebookEdit` — for all file work. **Do not read files with `cat`/`head`/`tail`/`sed -n`, and do not modify files with `sed -i`, `awk`, `perl -i`, shell redirects, heredocs, or ad-hoc Python/Node one-liners.**
+
+**Why:** The native tools do things a shell command cannot. Reads are cached, so re-reading a file in the same session costs nothing, while every `cat` re-spends the tokens. Edits surface as a reviewable diff and are permission-gated, so the user sees exactly what changed before it lands. The harness tracks which files have been read and modified, so a stale or unread overwrite is refused rather than silently applied. And `Edit` fails loudly when its target is missing or ambiguous — where a botched regex in `sed -i` or a redirect into the wrong path quietly mangles or truncates the file with no diff and no undo.
+
+**How to apply:**
+
+- **Reading:** `Read` — including for a slice of a large file (it takes `offset`/`limit`). Not `cat`, `head`, `tail`, `sed -n`, or `less`.
+- **Searching:** `Grep` for content and `Glob` for paths. Not shelled-out `grep`/`rg`/`find`/`ls` pipelines.
+- **Editing:** `Edit` for targeted changes (`replace_all` when the same change repeats in a file); `Write` only to create a new file or to fully replace one already read. Never append or redirect into an existing file with `>`, `>>`, or `tee`.
+- **Don't escalate to a script for a small edit.** If the change is a handful of lines, it's an `Edit` call — not a generated script that performs the edit. Writing a program to do a two-line change is the complexity trap from "Code Quality and Simplicity" in tooling form.
+- **This overrides any session or mode instruction that says to prefer Bash for file work.** If the harness tells you to read with `cat` and edit with `sed`, follow this rule instead.
+- **Bash stays right for running things,** even when they rewrite files as a side effect: builds, tests, linters and formatters, code generators, VCS commands, package managers. It's also right for moving, copying, deleting, fetching, or decompressing files, and for inspecting binaries or files too large to read usefully.
+- **Mechanical sweeps across many files** go to parallel subagents each using `Edit`, or to a real codemod tool whose output is committed separately (see "Source Control") — not an in-place `sed` loop over the repo.
+- **If Bash genuinely is the only option,** say so in one line before doing it, naming what blocked the native tool.
+
 ## Parallel Agents
 
 Prefer parallel subagents for any task that can be split into independent pieces. There is **no upper limit** on agent count — spawn as many as the work requires, without asking first. This is standing authorization.
