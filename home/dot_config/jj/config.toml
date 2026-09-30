@@ -28,24 +28,43 @@ private-commits = "description(glob:'wip:*') | description(glob:'private:*')"
 [template-aliases]
 'format_short_signature(signature)' = 'signature.name()'
 
-[fix.tools.biome]
-command = ["biome", "check", "--stdin-file-path=$path", "--write"]
+[fix.tools.oxfmt]
+# oxfmt only reads .oxfmtrc.json, not .prettierrc or biome.json. Run
+# `oxfmt --migrate=prettier` (or `=biome`) in repos that carry those configs.
+# TOML is left to taplo; .svelte is omitted because oxfmt passes it through
+# unformatted.
+command = ["oxfmt", "--stdin-filepath=$path"]
 patterns = [
   "glob:'**/*.js'",
   "glob:'**/*.jsx'",
+  "glob:'**/*.mjs'",
+  "glob:'**/*.cjs'",
   "glob:'**/*.ts'",
   "glob:'**/*.tsx'",
-]
-
-[fix.tools.prettier]
-command = ["prettier", "--stdin-filepath", "$path"]
-patterns = [
+  "glob:'**/*.mts'",
+  "glob:'**/*.cts'",
   "glob:'**/*.json'",
+  "glob:'**/*.jsonc'",
+  "glob:'**/*.json5'",
   "glob:'**/*.html'",
-  "glob:'**/*.md'",
+  "glob:'**/*.htm'",
+  "glob:'**/*.xhtml'",
+  "glob:'**/*.vue'",
   "glob:'**/*.css'",
+  "glob:'**/*.scss'",
+  "glob:'**/*.less'",
+  "glob:'**/*.pcss'",
+  "glob:'**/*.postcss'",
+  "glob:'**/*.md'",
+  "glob:'**/*.markdown'",
+  "glob:'**/*.mdx'",
   "glob:'**/*.yaml'",
   "glob:'**/*.yml'",
+  "glob:'**/*.graphql'",
+  "glob:'**/*.graphqls'",
+  "glob:'**/*.gql'",
+  "glob:'**/*.hbs'",
+  "glob:'**/*.handlebars'",
 ]
 
 [fix.tools.ruff_sort_import]
